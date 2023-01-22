@@ -32,6 +32,7 @@
 
 #include <Inventor/SbTime.h>
 #include <Inventor/events/SoKeyboardEvent.h>
+#include <Inventor/errors/SoDebugError.h>
 
 #include "Inventor/Wx/devices/SoWxKeyboard.h"
 #include "SoWxKeyboardP.h"

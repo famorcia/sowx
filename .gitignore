@@ -34,3 +34,4 @@
 # IDE related 
 .idea
 cmake-build-*
+build
