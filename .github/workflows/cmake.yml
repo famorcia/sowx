@@ -32,7 +32,7 @@ jobs:
       run: sudo apt-get update
       
     - name: Add wxWidgets and Open Inventor
-      run: sudo apt-get install wx3.2-headers* libwxgtk3.2* libboost*-dev  inventor-*
+      run: sudo apt-get install wx3.2-headers* libwxgtk3.2* libboost*-dev  libcoin*-dev
 
     #- name: Add Coin
     #  run: wget -c https://github.com/coin3d/coin/releases/download/Coin-4.0.0/coin-4.0.0-src.tar.gz
