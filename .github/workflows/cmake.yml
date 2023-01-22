@@ -34,25 +34,14 @@ jobs:
     - name: Add wxWidgets and Open Inventor
       run: sudo apt-get install wx3.2-headers* libwxgtk3.2* libboost*-dev  libcoin*-dev
 
-    #- name: Add Coin
-    #  run: wget -c https://github.com/coin3d/coin/releases/download/Coin-4.0.0/coin-4.0.0-src.tar.gz
-
-    #- name: Extract 
-    #  run: tar zxvf coin-4.0.0-src.tar.gz
-      
-    #- name: Compile Coin
-     # run: sh ./coin/configure && make -j 4 && sudo make install
-
-#      run: sudo apt-get install coin
-
-      #- name: Configure CMake
+    - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      #run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
-    #- name: Build
+    - name: Build
       # Build your program with the given configuration
-     # run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     #- name: Test
     #  working-directory: ${{github.workspace}}/build
