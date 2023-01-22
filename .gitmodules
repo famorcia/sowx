@@ -1,0 +1,12 @@
+[submodule "src/Inventor/Ww/common"]
+	path = src/Inventor/Ww/common
+	url = git@github.com:famorcia/sogui.git
+[submodule "cpack.d"]
+	path = cpack.d
+	url = https://github.com/coin3d/cpack.d
+[submodule "data"]
+	path = data
+	url = https://github.com/coin3d/soanydata
+[submodule "src/Inventor/Wx/common"]
+	path = src/Inventor/Wx/common
+	url = git@github.com:famorcia/sogui.git
