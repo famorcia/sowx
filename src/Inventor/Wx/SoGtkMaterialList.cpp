@@ -29,7 +29,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
-
+#if 0
 #if HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -317,3 +317,4 @@ SoWxMaterialList::getDefaultIconTitle(// virtual, protected
 } // getDefaultIconTitle()
 
 // *************************************************************************
+#endif

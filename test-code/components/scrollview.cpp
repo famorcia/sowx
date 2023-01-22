@@ -35,7 +35,7 @@
 */
 
 /***********************************************************************/
-
+#if 0
 #include <Inventor/Wx/SoWx.h>
 #include <Inventor/Wx/SoWxRenderArea.h>
 #include <Inventor/nodes/SoCone.h>
@@ -130,3 +130,4 @@ main(int argc, char ** argv)
 
   return 0;
 }
+#endif

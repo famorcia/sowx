@@ -30,6 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
+#if 0
 #ifndef SOWX_GRAPHEDITOR_H
 #define SOWX_GRAPHEDITOR_H
 
@@ -112,3 +113,4 @@ private:
 // *************************************************************************
 
 #endif // ! SOWX_H
+#endif

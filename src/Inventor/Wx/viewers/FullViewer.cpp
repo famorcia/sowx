@@ -162,7 +162,7 @@ SoWxFullViewer::buildWidget(wxWindow* parent) {
         this->buildPopupMenu();
 
 #if SOWX_DEBUG && 0
-    SoDebugError::postInfo("SoWxFullViewer::buildWidget", "Step-2");
+        SoDebugError::postInfo("SoWxFullViewer::buildWidget", "Step-2");
     SoWxP::dumpWindowData(parent);
 #endif
 
@@ -197,12 +197,12 @@ SoWxFullViewer::isDecoration(void) const{
 void SoWxFullViewer::setPopupMenuEnabled(const SbBool enable){
 #if SOWX_DEBUG
     if ((enable && this->isPopupMenuEnabled()) ||
-       (!enable && !this->isPopupMenuEnabled())) {
-    SoDebugError::postWarning("SoWxFullViewer::setPopupMenuEnabled",
-                              "popup menu already turned %s",
-                              enable ? "on" : "off");
-    return;
-  }
+        (!enable && !this->isPopupMenuEnabled())) {
+        SoDebugError::postWarning("SoWxFullViewer::setPopupMenuEnabled",
+                                  "popup menu already turned %s",
+                                  enable ? "on" : "off");
+        return;
+    }
 #endif
     PRIVATE(this)->menuenabled = enable;
 }
@@ -506,23 +506,28 @@ SoWxFullViewer::openPopupMenu(const SbVec2s position) {
 }
 
 void
-SoWxFullViewer::setLeftWheelString(const char * const name) {
-    delete [] this->leftWheelStr;
-    this->leftWheelStr = NULL;
+initString(char* &destination,
+           const char* data) {
+    delete [] destination;
+    destination = 0;
+    if (data) {
+        int length = strlen(data) + 1;
+        destination = strncpy(new char[length], data, length);
+    }
+}
 
-    if (name)
-        this->leftWheelStr = strcpy(new char [strlen(name)+1], name);
+void
+SoWxFullViewer::setLeftWheelString(const char * const name) {
+    initString(this->leftWheelStr, name);
+
     if (this->leftWheelLabel)
         this->leftWheelLabel->SetLabel(name ? name : "");
 }
 
 void
 SoWxFullViewer::setBottomWheelString(const char * const name) {
-    delete [] this->bottomWheelStr;
-    this->bottomWheelStr = NULL;
+    initString(this->bottomWheelStr, name);
 
-    if (name)
-        this->bottomWheelStr = strcpy(new char [strlen(name)+1], name);
     if (this->bottomWheelLabel)
         this->leftWheelLabel->SetLabel(name ? name : "");
 
@@ -530,11 +535,7 @@ SoWxFullViewer::setBottomWheelString(const char * const name) {
 
 void
 SoWxFullViewer::setRightWheelString(const char * const name) {
-    delete [] this->rightWheelStr;
-    this->rightWheelStr = NULL;
-
-    if (name)
-        this->rightWheelStr = strcpy(new char [strlen(name)+1], name);
+    initString(this->rightWheelStr, name);
 
     if (this->rightWheelLabel) {
         this->rightWheelLabel->SetLabel(name ? name : "");

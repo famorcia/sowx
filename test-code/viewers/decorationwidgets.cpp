@@ -53,7 +53,6 @@ public:
 
         wxWindow* window = SoWx::init("renderarea");
 
-        SoWxFullViewer * renderarea =
                 new SoWxFullViewer(window,
                                    "Renderarea demonstration",
                                    FALSE,

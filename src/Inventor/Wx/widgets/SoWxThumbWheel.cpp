@@ -176,14 +176,11 @@ SoWxThumbWheel::paintEvent(wxPaintEvent& WXUNUSED(event)) {
     wheelrect.SetRight( wheelrect.GetRight() - 1);
     // wheelrect is now wheel-only
 
-    wxRect sRect;
     wxRect dRect;
     if (this->orient == Vertical) {
-        sRect = wxRect(0,0,w,dval);
         dRect = wxRect(wheelrect.GetLeft(),wheelrect.GetTop(),w,dval);
     }
     else {
-        sRect = wxRect(0,0,dval,w);
         dRect = wxRect(wheelrect.GetLeft(),wheelrect.GetTop(),dval,w);
     }
 
@@ -264,9 +261,10 @@ SoWxThumbWheel::mouseReleaseEvent(wxMouseEvent& WXUNUSED(event)) {
 }
 
 void
-SoWxThumbWheel::mouseWheel(wxMouseEvent &event) {
+SoWxThumbWheel::mouseWheel(wxMouseEvent &WXUNUSED(event)) {
     SOWX_STUB();
     return;
+#if 0
     int delta = /*event.GetWheelDelta() * */(float)(event.GetWheelRotation()) / 120.0;
 #if SOWX_DEBUG && 0
     SoDebugError::postInfo("SoWxThumbWheel::mouseWheel",
@@ -282,6 +280,7 @@ SoWxThumbWheel::mouseWheel(wxMouseEvent &event) {
     Refresh();
     sendEvent(SO_WX_MOUSE_WHEEL_MOVED,
               "mouseWheel");
+#endif
 }
 
 /*

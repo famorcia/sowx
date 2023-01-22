@@ -68,10 +68,8 @@ public:
                                                     wxDefaultPosition);
 
         asimpleframe->SetSize(40,300);
-        wxWindow* w = renderarea->buildRightTrim(asimpleframe);
-
+        renderarea->buildRightTrim(asimpleframe);
         std::clog<<SoWxP::dumpWindowData(asimpleframe)<<std::endl;
-        //asimpleframe->SetSize(w->GetSize());
         asimpleframe->Show();
         return true;
     }
