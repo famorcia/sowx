@@ -20,6 +20,7 @@ set(HDRS
   Inventor/${Gui}/So${Gui}SliderSetBase.h           # added
   Inventor/${Gui}/So${Gui}SliderSet.h               # added
   Inventor/${Gui}/So${Gui}TransformSliderSet.h      # added
+  Inventor/${Gui}/So${Gui}DirectionalLightEditor.h  # added
   Inventor/${Gui}/devices/6DOFEvents.h
   Inventor/${Gui}/devices/So${Gui}DeviceP.h
   Inventor/${Gui}/devices/So${Gui}SpacenavDevice.h
@@ -50,6 +51,7 @@ set(SRCS
   Inventor/${Gui}/So${Gui}SliderSet.cpp #added
   Inventor/${Gui}/So${Gui}TransformSliderSet.cpp #added
   #Inventor/${Gui}/devices/6DOFEvents.cpp             # missing
+  Inventor/${Gui}/So${Gui}DirectionalLightEditor.cpp
   Inventor/${Gui}/devices/So${Gui}Device.cpp
   Inventor/${Gui}/devices/So${Gui}InputFocus.cpp
   Inventor/${Gui}/devices/So${Gui}Keyboard.cpp
@@ -253,7 +255,7 @@ set(INST_HDRS
   "${CMAKE_CURRENT_BINARY_DIR}/Inventor/${Gui}/So${Gui}Object.h"
   "${CMAKE_CURRENT_BINARY_DIR}/Inventor/${Gui}/So${Gui}RenderArea.h"
   Inventor/${Gui}/So${Gui}Clipboard.h
-  # Inventor/${Gui}/So${Gui}DirectionalLightEditor.h # it's just a STUB
+  Inventor/${Gui}/So${Gui}DirectionalLightEditor.h
   Inventor/${Gui}/So${Gui}LightSliderSet.h
   Inventor/${Gui}/So${Gui}MaterialSliderSet.h
   # Inventor/${Gui}/So${Gui}PrintDialog.h

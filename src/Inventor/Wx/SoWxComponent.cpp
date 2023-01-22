@@ -44,6 +44,8 @@
 #include "Inventor/Wx/viewers/SoWxConstrainedViewer.h"
 #include "Inventor/Wx/viewers/SoWxFlyViewer.h"
 
+#include "Inventor/Wx/SoWxInternal.h"
+
 #include "sowxdefs.h"
 #include "SoWxP.h"
 
@@ -123,7 +125,7 @@ SoWxComponent::setBaseWidget(wxWindow* w) {
 #ifdef SOWX_DEBUG
     SoDebugError::postInfo("SoWx::setBaseWidget",
                            "%s",
-                           SoWxP::dumpWindowData(w).c_str());
+                           dumpWindowData(w).c_str());
 #endif
 
     std::string iconText = this->getDefaultIconTitle();
@@ -333,10 +335,10 @@ SoWxComponent::setSize(const SbVec2s size) {
 #ifdef SOWX_DEBUG
     SoDebugError::postInfo("SoWx::setSize",
                            " baseWidget %s",
-    SoWxP::dumpWindowData(this->getBaseWidget()).c_str());
+    dumpWindowData(this->getBaseWidget()).c_str());
     SoDebugError::postInfo("SoWx::setSize",
                            " shellWidget %s",
-    SoWxP::dumpWindowData(this->getShellWidget()).c_str());
+    dumpWindowData(this->getShellWidget()).c_str());
 #endif
 
 #if 0

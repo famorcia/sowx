@@ -4,9 +4,9 @@ small, self-contained Wx- or SoWx-specific tests.
 Compilation after a correct SoWx-installation on your system is done
 by executing
 
-        $ soww-config --build <executablename> <sourcefile.cpp>
+        $ sowx-config --build <executable name> <sourcefile.cpp>
 
-(``soww-config'' must be in your $PATH).
+(``sowx-config'' must be in your $PATH).
 
 The sources are all under the 3-clause BSD license.
 

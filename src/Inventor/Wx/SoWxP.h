@@ -73,8 +73,6 @@ public:
     wxWindow* getMainFrame() const;
 
     void finish();
-
-    static std::string dumpWindowData(const wxWindow* window);
 };
 
 #endif //SOWX_SOWXP_H

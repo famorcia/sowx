@@ -33,11 +33,11 @@
 #include "Inventor/Wx/viewers/SoWxFullViewerP.h"
 #include "Inventor/Wx/viewers/SoWxFullViewer.h"
 #include "Inventor/Wx/widgets/WheelEvents.h"
-#include "Inventor/Wx/SoWxP.h"
+#include "Inventor/Wx/widgets/SoWxThumbWheel.h"
+#include "Inventor/Wx/SoWxInternal.h"
 #include "ViewersWxIds.h"
 #include "ButtonIndexValues.h"
 #include "sowxdefs.h"
-#include "Inventor/Wx/widgets/SoWxThumbWheel.h"
 
 #include <wx/gbsizer.h>
 
@@ -97,10 +97,10 @@ SoWxFullViewerP::showDecorationWidgets(SbBool onOff) {
         sizer->AddGrowableRow( 0 );
 
 #if SOWX_DEBUG && 0
-        SoWxP::dumpWindowData(PUBLIC(this)->leftDecoration);
-        SoWxP::dumpWindowData(this->canvas);
-        SoWxP::dumpWindowData(PUBLIC(this)->rightDecoration);
-        SoWxP::dumpWindowData(PUBLIC(this)->bottomDecoration);
+        dumpWindowData(PUBLIC(this)->leftDecoration);
+        dumpWindowData(this->canvas);
+        dumpWindowData(PUBLIC(this)->rightDecoration);
+        dumpWindowData(PUBLIC(this)->bottomDecoration);
 #endif
 
     } else {
@@ -119,7 +119,7 @@ SoWxFullViewerP::showDecorationWidgets(SbBool onOff) {
 
 #if SOWX_DEBUG
     SoDebugError::postInfo("SoWxFullViewerP::showDecorationWidgets", "dumpWindowData");
-    SoWxP::dumpWindowData(this->viewerwidget);
+    dumpWindowData(this->viewerwidget);
 #endif
 
     wxSize size = this->viewerwidget->GetSize();

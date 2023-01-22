@@ -7,7 +7,7 @@ Cookbook Procedure
 
   2) run cmake
 
-    $ cmake .. -DCMAKE_INSTALL_PREFIX=<your installation path /usr/local is the defaulf>
+    $ cmake .. -DCMAKE_INSTALL_PREFIX=<your installation path /usr/local is the default>
 
   4) compile and install
 

@@ -30,4 +30,79 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include "SoWxDirectionalLightEditor.h"
+#include "Inventor/Wx/SoWxDirectionalLightEditor.h"
+
+#include "sowxdefs.h"
+
+SOWX_OBJECT_SOURCE(SoWxDirectionalLightEditor);
+
+SoWxDirectionalLightEditor::SoWxDirectionalLightEditor(wxWindow *parent, const char *const name, SbBool embed)
+        : SoWxComponent(parent, name, embed) {
+
+}
+
+SoWxDirectionalLightEditor::SoWxDirectionalLightEditor(wxWindow *parent, const char *const name, SbBool embed,
+                                                       SbBool build) {
+    SOWX_STUB();
+}
+
+SoWxDirectionalLightEditor::~SoWxDirectionalLightEditor() {
+
+}
+
+
+void SoWxDirectionalLightEditor::attach(SoPath *pathToLight) {
+    SOWX_STUB();
+}
+
+void SoWxDirectionalLightEditor::detach() {
+    SOWX_STUB();
+}
+
+SbBool SoWxDirectionalLightEditor::isAttached() {
+    SOWX_STUB();
+    return 0;
+}
+
+void SoWxDirectionalLightEditor::setLight(const SoDirectionalLight &newLight) {
+    SOWX_STUB();
+}
+
+const SoDirectionalLight &SoWxDirectionalLightEditor::getLight() const {
+    SOWX_STUB();
+    static SoDirectionalLight* light = 0;
+    return (*light);
+}
+
+void SoWxDirectionalLightEditor::addLightChangedCallback(SoWxDirectionalLightEditorCB *f, void *userData) {
+    SOWX_STUB();
+}
+
+void SoWxDirectionalLightEditor::removeLightChangedCallback(SoWxDirectionalLightEditorCB *f, void *userData) {
+    SOWX_STUB();
+}
+
+void SoWxDirectionalLightEditor::show() {
+    SOWX_STUB();
+}
+
+void SoWxDirectionalLightEditor::hide() {
+    SOWX_STUB();
+}
+
+
+const char *SoWxDirectionalLightEditor::getDefaultWidgetName(void) const {
+    SOWX_STUB();
+    return ("");
+}
+
+const char *SoWxDirectionalLightEditor::getDefaultTitle(void) const {
+    SOWX_STUB();
+    return ("");
+}
+
+const char *SoWxDirectionalLightEditor::getDefaultIconTitle(void) const {
+    SOWX_STUB();
+    return ("");
+}
+

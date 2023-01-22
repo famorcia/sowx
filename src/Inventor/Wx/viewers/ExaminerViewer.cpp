@@ -34,15 +34,12 @@
 #include "Inventor/Wx/viewers/SoWxExaminerViewerP.h"
 #include "Inventor/Wx/viewers/SoWxViewer.h"
 #include "Inventor/Wx/viewers/SoWxFullViewer.h"
-#include "Inventor/nodes/SoOrthographicCamera.h"
+#include <Inventor/nodes/SoOrthographicCamera.h>
+#include <Inventor/nodes/SoPerspectiveCamera.h>
+
 #include "sowxdefs.h"
 #include "ButtonIndexValues.h"
 
-#ifdef HAVE_CONFIG_H
-#include <config.h> // for HAVE_LIBXPM
-#include <Inventor/nodes/SoPerspectiveCamera.h>
-
-#endif // HAVE_CONFIG_H
 
 #if HAVE_LIBXPM
 #include <Inventor/Wx/common/pixmaps/ortho.xpm>

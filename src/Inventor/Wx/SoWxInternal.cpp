@@ -30,4 +30,88 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include "SoWxInternal.h"
+#include "Inventor/Wx/SoWxInternal.h"
+
+#include <sstream>
+
+
+std::string
+nameToString(const wxWindow* w) {
+    std::ostringstream  oss;
+    oss<<"name:\""<<w->GetName()<<"\"";
+    oss<<" ptr:"<<std::hex<<w;
+    return (oss.str());
+}
+
+std::string
+sizeToString(const wxSize& s) {
+    std::ostringstream  oss;
+    oss<<"size:("<<s.GetX()<<","<<s.GetY()<<")";
+    return (oss.str());
+}
+
+std::string
+dumpSizer(wxSizer* sizer,
+          const std::string& prefix) {
+    std::string out;
+    out += prefix;
+    out += " -> sizer:";
+    out += sizeToString(sizer->GetSize());
+    return (out);
+}
+
+std::string
+dumpData(const wxWindow* w,
+         const std::string& prefix="") {
+    std::string out;
+    out += prefix;
+    out += nameToString(w);
+    out += " ";
+    out += sizeToString(w->GetSize());
+    out += " minClientSize:";
+    out += sizeToString(w->GetMinClientSize());
+    if(w->GetSizer()) {
+        out += dumpSizer(w->GetSizer(), prefix);
+#if 0
+        wxSizerItemList list = w->GetSizer()->GetChildren();
+        wxSizerItemList::compatibility_iterator node = list.GetFirst();
+        while(node) {
+            if(node->GetData() && node->GetData()->GetSizer())
+                dumpSizer(node->GetData()->GetSizer(), prefix);
+           // if(node->GetData() && node->GetData()->GetWindow())
+            //    dumpData(node->GetData()->GetWindow(), prefix);
+            node = node->GetNext();
+        }
+#endif
+    }
+    return (out);
+}
+
+std::string
+dumpWindowDataImpl(const wxWindow* window, int level) {
+    if(window == 0) {
+        return ("windows is null\n");
+    }
+
+    std::string out;
+    std::string tabs;
+    for(int i=0;i<level;++i)
+        tabs+='-';
+
+    out += "\n";
+    out += dumpData(window, tabs);
+
+    const wxWindowList& windows_list =  window->GetWindowChildren();
+    wxWindowList::compatibility_iterator node = windows_list.GetFirst();
+    while (node) {
+        wxWindow *win = node->GetData();
+        out += dumpWindowDataImpl(win, level+1);
+        node = node->GetNext();
+    }
+    return (out);
+}
+
+std::string
+dumpWindowData(const wxWindow* window) {
+    return (dumpWindowDataImpl(window, 0));
+}

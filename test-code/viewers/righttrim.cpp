@@ -30,9 +30,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#define  SOWX_INTERNAL
 #include <Inventor/Wx/SoWx.h>
-#include "Inventor/Wx/SoWxP.h"
+#include "Inventor/Wx/SoWxInternal.h"
 
 #define protected public
 #include <Inventor/Wx/viewers/SoWxFullViewer.h>
@@ -69,7 +68,7 @@ public:
 
         asimpleframe->SetSize(40,300);
         renderarea->buildRightTrim(asimpleframe);
-        std::clog<<SoWxP::dumpWindowData(asimpleframe)<<std::endl;
+        std::clog<<dumpWindowData(asimpleframe)<<std::endl;
         asimpleframe->Show();
         return true;
     }

@@ -25,4 +25,8 @@ priority the item has.
 
     20230122 famorcia.
 
-    20230112 famorcia.
+004 Color Editor
+
+    Color Editor does not work stand-alone :-/
+
+    20230122 famorcia.

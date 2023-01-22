@@ -33,6 +33,7 @@
 #include "Inventor/Wx/SoWx.h"
 #include "Inventor/Wx/SoWxP.h"
 #include <wx/event.h>
+#include "Inventor/Wx/SoWxInternal.h"
 #include "sowxdefs.h"
 
 wxWindow*
@@ -84,7 +85,7 @@ SoWx::init(int & argc,
 #ifdef SOWX_DEBUG
     SoDebugError::postInfo("SoWx::init",
                            "%s",
-                           SoWxP::dumpWindowData(SoWxP::instance()->getMainFrame()).c_str());
+                           dumpWindowData(SoWxP::instance()->getMainFrame()).c_str());
 #endif
     return (SoWxP::instance()->getMainFrame());
 }
@@ -132,7 +133,7 @@ SoWx::init(wxWindow* toplevelwidget) {
 #ifdef SOWX_DEBUG
     SoDebugError::postInfo("SoWx::init",
                            "%s",
-                           SoWxP::dumpWindowData(SoWxP::instance()->getMainFrame()).c_str());
+                           dumpWindowData(SoWxP::instance()->getMainFrame()).c_str());
 #endif
 }
 

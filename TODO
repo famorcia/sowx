@@ -1,8 +1,11 @@
 TODO
 ====
 
-* [ ] Add missing classes
+* [X] Add popup menu
+* [X] Add missing classes
 * [ ] wxPython
 * [ ] Make a Star Wars like text demo
 * [ ] Add central mouse button for translation
+* [ ] Restore *Editor classes
+* [ ] Use EGL in wxWidgets (required in ubuntu)
 

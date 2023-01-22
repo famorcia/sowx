@@ -11,7 +11,7 @@
 
 static SoMaterial * material;
 
-#define WANT_INTEGRATED 1
+#define WANT_INTEGRATED 0
 
 SoSeparator *
 makescene(void)

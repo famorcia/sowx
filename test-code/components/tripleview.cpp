@@ -65,8 +65,8 @@
 #include <wx/gbsizer.h>
 
 #include "wx/wx.h"
-#define SOWX_INTERNAL
-#include "Inventor/Wx/SoWxP.h"
+
+#include "Inventor/Wx/SoWxInternal.h"
 
 /***********************************************************************/
 
@@ -99,14 +99,14 @@ add_view(wxWindow * viewparent, SoGroup * common, SbRotation cameraorientation)
     root->addChild(common);
 
     std::cerr<<"-----------------------------------\n";
-    std::cerr<<SoWxP::dumpWindowData(viewparent)<<std::endl;
+    std::cerr<<dumpWindowData(viewparent)<<std::endl;
     std::cerr<<"-----------------------------------\n";
 
     SoWxRenderArea * area = new SoWxRenderArea(viewparent);
     // SoWxExaminerViewer * area = new SoWxExaminerViewer(viewparent);
     area->setSceneGraph(root);
     std::cerr<<"-------AFTER-----------------\n";
-    std::cerr<<SoWxP::dumpWindowData(viewparent)<<std::endl;
+    std::cerr<<dumpWindowData(viewparent)<<std::endl;
     std::cerr<<"-----------------------------------\n";
 
 #ifndef __COIN__

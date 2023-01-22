@@ -32,10 +32,12 @@
 #ifndef SOWX_SOWXINTERNAL_H
 #define SOWX_SOWXINTERNAL_H
 
+#include <wx/wx.h>
 
 class SoWxInternal {
 
 };
 
+std::string dumpWindowData(const wxWindow* window);
 
 #endif //SOWX_SOWXINTERNAL_H

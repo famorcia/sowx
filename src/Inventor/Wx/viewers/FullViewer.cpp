@@ -34,6 +34,7 @@
 #include "Inventor/Wx/viewers/SoWxFullViewerP.h"
 #include "Inventor/Wx/widgets/SoWxThumbWheel.h"
 #include <Inventor/Wx/widgets/SoWxPopupMenu.h>
+#include "Inventor/Wx/SoWxInternal.h"
 #include "sowxdefs.h"
 #include "Inventor/Wx/SoWxP.h"
 #include "ButtonIndexValues.h"
@@ -136,11 +137,11 @@ SoWxFullViewer::buildWidget(wxWindow* parent) {
     SoDebugError::postInfo("SoWxFullViewer::buildWidget", "[invoked]");
     parent->SetName("MainWindow");
     SoDebugError::postInfo("SoWxFullViewer::buildWidget", "Step-1");
-    SoWxP::dumpWindowData(parent);
+    dumpWindowData(parent);
 #endif
 
     PRIVATE(this)->viewerwidget = parent;
-    PRIVATE(this)->viewerwidget->SetName("viewerwidget");
+    PRIVATE(this)->viewerwidget->SetName("viewer_widget");
 
     this->registerWidget(PRIVATE(this)->viewerwidget);
 
@@ -163,7 +164,7 @@ SoWxFullViewer::buildWidget(wxWindow* parent) {
 
 #if SOWX_DEBUG && 0
         SoDebugError::postInfo("SoWxFullViewer::buildWidget", "Step-2");
-    SoWxP::dumpWindowData(parent);
+    dumpWindowData(parent);
 #endif
 
     PRIVATE(this)->bindEvents(PRIVATE(this)->viewerwidget);
@@ -289,9 +290,9 @@ SoWxFullViewer::buildDecoration(wxWindow* parent) {
 #endif
 
 #if SOWX_DEBUG && 0
-    SoWxP::dumpWindowData(this->leftDecoration);
-    SoWxP::dumpWindowData(this->rightDecoration);
-    SoWxP::dumpWindowData(this->bottomDecoration);
+    dumpWindowData(this->leftDecoration);
+    dumpWindowData(this->rightDecoration);
+    dumpWindowData(this->bottomDecoration);
 #endif
 
     PRIVATE(this)->initThumbWheelEventMap();
@@ -318,7 +319,7 @@ SoWxFullViewer::buildLeftTrim(wxWindow* parent){
     p->SetSizer(sizer);
     p->Fit();
 #if SOWX_DEBUG && 0
-    SoWxP::dumpWindowData(p);
+    dumpWindowData(p);
 #endif
     return p;
 }
@@ -431,7 +432,7 @@ SoWxFullViewer::buildViewerButtons(wxWindow* parent) {
 
 void
 SoWxFullViewer::createViewerButtons(wxWindow* parent,
-                                    SbPList * buttonlist) {
+                                    SbPList * button_list) {
     for (int i=0; i <= SEEK_BUTTON; i++) {
         wxAnyButton *p = new wxButton(parent, i);
 
@@ -484,7 +485,7 @@ SoWxFullViewer::createViewerButtons(wxWindow* parent,
 
         p->SetWindowStyle( wxBU_EXACTFIT | wxBU_NOTEXT);
         p->SetSize(XPM_BUTTON_SIZE, XPM_BUTTON_SIZE);
-        buttonlist->append(p);
+        button_list->append(p);
     }
 }
 
@@ -549,20 +550,20 @@ SoWxFullViewer::sizeChanged(const SbVec2s & size) {
                          size[0], size[1]);
 #endif
 
-    SbVec2s newsize(size);
+    SbVec2s new_size(size);
     // wxWidgets already has only size of gl area
     // decorations size do not need to be removed
     /*
      if (PRIVATE(this)->decorations) {
-        newsize[0] -= width(this->leftDecoration);
-        newsize[0] -= width(this->rightDecoration);
-        newsize[1] -= height(this->bottomDecoration);
+        new_size[0] -= width(this->leftDecoration);
+        new_size[0] -= width(this->rightDecoration);
+        new_size[1] -= height(this->bottomDecoration);
     }
-    newsize = SbVec2s(SoWxMax(newsize[0], (short)1),
-                      SoWxMax(newsize[1], (short)1));
+    new_size = SbVec2s(SoWxMax(new_size[0], (short)1),
+                      SoWxMax(new_size[1], (short)1));
 */
 
-    inherited::sizeChanged(newsize);
+    inherited::sizeChanged(new_size);
 }
 
 const char *
