@@ -11,9 +11,18 @@ priority the item has.
     wxQT does not support wxGLAttributes, require list of int!
 
     20230112 famorcia.
+    Solved, moved from wxGLAttributes to list of int.
 
 002 wxX11
 
     wxX11 does not support wxCheckButtons
+
+    20230112 famorcia.
+
+003 Sizing
+
+    Sizing is not correct, should set 400x400, but is 400x200
+
+    20230122 famorcia.
 
     20230112 famorcia.
