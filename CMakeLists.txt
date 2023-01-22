@@ -154,7 +154,10 @@ if (X11_FOUND)
   endif ()
 endif()
 
-find_package(Coin REQUIRED)
+find_package(Coin)
+if(NOT Coin_FOUND)
+  MESSAGE(FATAL_ERROR "Found Coin")
+endif()
 
 set(SO${GUI}_PKG_DEPS "Coin wxWidgets OpenGL")
 
