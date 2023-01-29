@@ -45,14 +45,14 @@ class SoWxApp : public  wxApp {
 public:
 
     virtual bool
-    OnInit() wxOVERRIDE {
+    OnInit()  {
         if ( !wxApp::OnInit() )
             return false;
         return true;
     }
 
     virtual void
-    CleanUp() wxOVERRIDE {
+    CleanUp()  {
 #if SOWX_DEBUG
         SoDebugError::postInfo("SoWxApp::CleanUp",
                                "done!");

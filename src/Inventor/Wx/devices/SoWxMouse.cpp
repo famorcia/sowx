@@ -82,15 +82,16 @@ const SoEvent * SoWxMouse::translateEvent(wxEvent& event) {
 #endif
         return (conv);
     }
-
+     bool isWheelInverted = false;
+     //TODO: mouse_event->IsWheelInverted()
     // Convert wheel mouse events to Coin SoMouseButtonEvents.
 #ifdef HAVE_SOMOUSEBUTTONEVENT_BUTTON5
     if (mouse_event->GetWheelRotation() > 0)
-        PRIVATE(this)->buttonevent->setButton(mouse_event->IsWheelInverted() ?
+        PRIVATE(this)->buttonevent->setButton(isWheelInverted ?
                                               SoMouseButtonEvent::BUTTON5 :
                                               SoMouseButtonEvent::BUTTON4);
     else if (mouse_event->GetWheelRotation() < 0)
-        PRIVATE(this)->buttonevent->setButton(mouse_event->IsWheelInverted() ?
+        PRIVATE(this)->buttonevent->setButton(isWheelInverted ?
                                               SoMouseButtonEvent::BUTTON4 :
                                               SoMouseButtonEvent::BUTTON5);
 

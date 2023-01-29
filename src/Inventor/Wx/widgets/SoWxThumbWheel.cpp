@@ -53,6 +53,8 @@
 #include <cassert>
 #include <cstdio>
 #include <sstream>
+#include <vector>
+#include <algorithm>
 #include <stdint.h>
 
 wxBEGIN_EVENT_TABLE(SoWxThumbWheel, wxPanel)

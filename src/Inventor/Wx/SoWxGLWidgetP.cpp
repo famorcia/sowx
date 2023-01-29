@@ -346,7 +346,7 @@ SoWxGLWidgetP::getOverlayContext(void) {
 SbBool
 SoWxGLWidgetP::isDirectRendering(void) {
     SbBool res = FALSE;
-    if(this->currentglarea && this->currentglarea->GetGLCTXAttrs().x11Direct)
+    //TODO: if(this->currentglarea && this->currentglarea->GetGLCTXAttrs().x11Direct)
         res = TRUE;
     return (res);
 }

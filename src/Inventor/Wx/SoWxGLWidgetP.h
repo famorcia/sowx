@@ -42,6 +42,7 @@
 #include <wx/timer.h>
 
 #include <set>
+#include <vector>
 
 class SoWxGLArea;
 
@@ -71,7 +72,6 @@ public:
     int borderthickness;
 
     const wxGLContext * oldcontext;
-    wxGLAttributes glformat;
 
     void gl_init(wxCommandEvent&);
     void gl_reshape(wxSizeEvent&);

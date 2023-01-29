@@ -127,7 +127,7 @@ class MyApp : public wxApp
 {
 public:
 
-    virtual bool OnInit() wxOVERRIDE {
+    virtual bool OnInit()  {
         if ( !wxApp::OnInit() )
             return false;
 
