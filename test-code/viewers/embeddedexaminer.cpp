@@ -31,7 +31,7 @@
 \**************************************************************************/
 
 /*
-  Demonstrates embedding of an SoQtExaminerViewer within a simple
+  Demonstrates embedding of an SoWxExaminerViewer within a simple
   widget hierarchy.
 */
 
@@ -50,44 +50,37 @@
 #include <wx/sizer.h>
 #include <wx/frame.h>
 
-///////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////
-/// Class MyMainWindow
-///////////////////////////////////////////////////////////////////////////////
-class MyMainWindow : public wxFrame
+class SplitFrame : public wxFrame
 {
 private:
 
 protected:
-    wxSplitterWindow* m_splitter1;
-    wxPanel* m_panel19;
-    wxPanel* m_panel20;
+    wxSplitterWindow* splitter;
+    wxPanel* panel1;
+    wxPanel* panel2;
 
 public:
 
-    MyMainWindow( wxWindow* parent,
+    SplitFrame( wxWindow* parent,
                   wxWindowID id = wxID_ANY,
                   const wxString& title = wxEmptyString,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxSize( 500,300 ),
                   long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL )
-                  : wxFrame( parent, id, title, pos, size, style )
+            : wxFrame( parent, id, title, pos, size, style )
     {
         this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
         wxBoxSizer* bSizer12;
         bSizer12 = new wxBoxSizer( wxHORIZONTAL );
 
-        m_splitter1 = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
-        m_splitter1->Connect( wxEVT_IDLE, wxIdleEventHandler( MyMainWindow::m_splitter1OnIdle ), NULL, this );
+        splitter = new wxSplitterWindow( this, wxID_ANY);
+        splitter->Connect( wxEVT_IDLE, wxIdleEventHandler( SplitFrame::onIdle ), NULL, this );
+        splitter->Bind( wxEVT_SPLITTER_SASH_POS_CHANGING, &SplitFrame::onSplitterMovement, this);
 
-        m_panel19 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-        m_panel19->SetBackgroundColour(wxColour(0,0,0));
-        m_panel20 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-
-        m_panel20->SetBackgroundColour(wxColour(0,255,0));
+        panel1 = new wxPanel( splitter, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+        panel1->SetBackgroundColour(wxColour(125,0,125));
+        panel2 = new wxPanel( splitter, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 
         // Construct a simple scenegraph.
 
@@ -98,12 +91,12 @@ public:
 
         // Add the examinerviewer.
 
-        SoWxExaminerViewer * examinerviewer = new SoWxExaminerViewer(m_panel20);
+        SoWxExaminerViewer * examinerviewer = new SoWxExaminerViewer(panel2);
         examinerviewer->setSceneGraph(root);
         examinerviewer->show();
 
-        m_splitter1->SplitVertically( m_panel19, m_panel20, 0 );
-        bSizer12->Add( m_splitter1, 1, wxEXPAND, 5 );
+        splitter->SplitVertically( panel1, panel2, 0 );
+        bSizer12->Add( splitter, 1, wxEXPAND, 5 );
 
         this->SetSizer( bSizer12 );
         this->Layout();
@@ -111,13 +104,18 @@ public:
         this->Centre( wxBOTH );
     }
 
-    ~MyMainWindow() {
+    ~SplitFrame() {
     }
 
-    void m_splitter1OnIdle( wxIdleEvent& )
+    void onSplitterMovement(wxSplitterEvent& event) {
+        std::cerr<<"move: "<<event.GetSashPosition()<<std::endl;
+
+    }
+
+    void onIdle( wxIdleEvent& )
     {
-        m_splitter1->SetSashPosition( 0 );
-        m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( MyMainWindow::m_splitter1OnIdle ), NULL, this );
+        splitter->SetSashPosition( 0 );
+        splitter->Disconnect( wxEVT_IDLE, wxIdleEventHandler( SplitFrame::onIdle ), NULL, this );
     }
 
 };
@@ -127,19 +125,19 @@ public:
 int
 main(int argc, char ** argv)
 {
-  // Initialize Wx and SoWx.
+    // Initialize SoWx.
+    SoWx::init((wxWindow *)NULL);
 
-  SoWx::init((wxWindow *)NULL);
+    // Set up scrollview window.
+    SplitFrame * vp = new SplitFrame(0);
 
-  // Set up scrollview window.
-  MyMainWindow * vp = new MyMainWindow(0);
+    // show window
+    vp->Show();
 
-  // Map window.
-  vp->Show();
-  // Set termination condition.
-  // QObject::connect(qApp, SIGNAL(lastWindowClosed()), qApp, SLOT(quit()));
-  // Start event loop.
-  SoWx::mainLoop();
+    // start event loop.
+    SoWx::mainLoop();
 
-  return 0;
+    // remove all resources
+    SoWx::done();
+    return 0;
 }

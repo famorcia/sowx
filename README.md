@@ -25,3 +25,7 @@ Packages for platform can be generated using specific platforms
 Add 
 	"addressSanitizerEnabled": true,
 in CMakeSettings.json
+
+## Known limitations
+
+    

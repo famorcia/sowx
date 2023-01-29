@@ -1,32 +1,3 @@
 =====================================================================
-NOTE: see also src/Inventor/Wx/common/BUGS.txt.
+NOTE: please refer to https://github.com/famorcia/sowx/issues
 =====================================================================
-This is a list of issues that needs to be investigated and fixed.  The
-number is just the chronological numeric id, and has no bearing on what
-priority the item has.
-=====================================================================
-
-001 wxQt
-
-    wxQT does not support wxGLAttributes, require list of int!
-
-    20230112 famorcia.
-    Solved, moved from wxGLAttributes to list of int.
-
-002 wxX11
-
-    wxX11 does not support wxCheckButtons
-
-    20230112 famorcia.
-
-003 Sizing
-
-    Sizing is not correct, should set 400x400, but is 400x200
-
-    20230122 famorcia.
-
-004 Color Editor
-
-    Color Editor does not work stand-alone :-/
-
-    20230122 famorcia.

@@ -126,6 +126,7 @@ add_view(wxWindow * viewparent, SoGroup * common, SbRotation cameraorientation)
 class MyApp : public wxApp
 {
 public:
+
     virtual bool OnInit() wxOVERRIDE {
         if ( !wxApp::OnInit() )
             return false;
@@ -217,6 +218,7 @@ public:
 
         SoWx::show(parent);
         SoWx::mainLoop();
+        exit(0);  // TODO: check error on exit!
         return true;
     }
 };

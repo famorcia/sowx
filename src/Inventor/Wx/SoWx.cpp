@@ -123,9 +123,11 @@ SoWx::init(wxWindow* toplevelwidget) {
         SoWxP::instance()->setWxApp(wxApp::GetInstance());
     }
 
-    SoWxP::instance()->setMainFrame( toplevelwidget );
     SoWxP::instance()->getWxApp()->Bind(wxEVT_IDLE, &SoWxP::onIdle,  SoWxP::instance());
-    SoWxP::instance()->getMainFrame()->Bind(wxEVT_CLOSE_WINDOW, &SoWxP::onClose,  SoWxP::instance());
+    if(toplevelwidget) {
+        SoWxP::instance()->setMainFrame(toplevelwidget);
+        SoWxP::instance()->getMainFrame()->Bind(wxEVT_CLOSE_WINDOW, &SoWxP::onClose, SoWxP::instance());
+    }
     SoDB::getSensorManager()->setChangedCallback(SoGuiP::sensorQueueChanged,
                                                  NULL);
 

@@ -1,11 +1,15 @@
 TODO
 ====
 
-* [X] Add popup menu
-* [X] Add missing classes
 * [ ] wxPython
 * [ ] Make a Star Wars like text demo
-* [ ] Add central mouse button for translation
+* [ ] Add middle mouse button for translation
 * [ ] Restore *Editor classes
 * [ ] Use EGL in wxWidgets (required in ubuntu)
-
+* [X] wxQT does not support wxGLAttributes, require list of int!
+    Fixed now use list of int
+* [ ] wxX11 does not support wxCheckButtons
+* [ ] Color Editor does not work in stand-alone mode :-/
+* [ ] Add missing classes
+* [ ] tripleview is not realising resource properly
+* [ ] embeddedexaminer does not refresh while moving splitter
