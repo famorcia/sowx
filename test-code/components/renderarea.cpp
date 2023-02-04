@@ -44,14 +44,8 @@
   SoWxRenderArea when built with the 'embed' flag set to TRUE.
 */
 
-
-class MyPanel : public wxPanel {
-public:
-    wxDECLARE_EVENT_TABLE();
-};
-
-
-int main(int argc, char ** argv)
+int
+main(int argc, char ** argv)
 {
     wxWindow * window = SoWx::init("renderarea");
 

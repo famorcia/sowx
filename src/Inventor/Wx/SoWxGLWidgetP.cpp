@@ -51,17 +51,6 @@ SoWxGLWidgetP::SoWxGLWidgetP(SoWxGLWidget * o)
 SoWxGLWidgetP::~SoWxGLWidgetP() {
 }
 
-/*// Gets called by the SoWxGLArea instance upon keyboard presses. These
-// are then forwarded to subclasses for handling.
-void
-SoWxGLWidgetP::GLAreaKeyEvent(QKeyEvent * e, void * userdata)
-{
-    SoWxGLWidget * that = (SoWxGLWidget *)userdata;
-    that->processEvent(e);
-}*/
-
-
-// slot invoked upon QGLWidget initialization
 void
 SoWxGLWidgetP::gl_init(wxCommandEvent& )
 {
@@ -305,15 +294,6 @@ SoWxGLWidgetP::buildGLWidget(void) {
         // We've changed to a new widget, so notify subclasses through this
         // virtual method.
         PUBLIC(this)->widgetChanged(this->currentglwidget);
-
-        if (wascurrent) {
-            // If we are rebuilding, we need to explicitly call show() here,
-            // as no message to show will be given from an already visible
-            // parent. (If the glwidget was built but not shown before the
-            // rebuild, the call below doesn't do any harm, as the glwidget
-            // still won't become visible until all parents are visible.)
-            this->currentglwidget->Show();
-        }
     }
     catch (std::exception& e) {
         SoDebugError::postWarning("SoWxGLWidgetP::buildGLWidget",

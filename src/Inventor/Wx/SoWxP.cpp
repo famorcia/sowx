@@ -86,14 +86,6 @@ SoWxP::setWxApp(wxAppConsole* app) {
     main_app = app;
 }
 
-/**
- * if an app is not already available build and return
- */
-wxAppConsole*
-SoWxP::getWxApp() const {
-    return (main_app);
-}
-
 void
 SoGuiP::sensorQueueChanged(void *) {
     SoWxP::instance()->sensorQueueChanged();
@@ -284,7 +276,7 @@ SoWxP::finish() {
     SoDebugError::postInfo("SoWxP::finish",
                            "remove all internal resources");
 #endif
-    SoWxP::instance()->getWxApp()->Unbind(wxEVT_IDLE, &SoWxP::onIdle, SoWxP::instance());
+    wxTheApp->Unbind(wxEVT_IDLE, &SoWxP::onIdle, SoWxP::instance());
 
     stopTimers();
 

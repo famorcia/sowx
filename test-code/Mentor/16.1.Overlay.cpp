@@ -90,25 +90,26 @@ Separator { \
 int
 main(int , char **argv)
 {
-   // Initialize Inventor and Wx
-   wxWindow* myWindow = SoWx::init(argv[0]);
+    // Initialize Inventor and Wx
+    wxWindow* myWindow = SoWx::init(argv[0]);
 
-   // read the scene graph in
-   SoInput in;
-   SoNode *scene;
-   in.setBuffer((void *)overlayScene, (size_t) strlen(overlayScene));
-   if (! SoDB::read(&in, scene) || scene == NULL) {
-      printf("Couldn't read scene\n");
-      exit(1);
-   }
-
-   // Allocate the viewer, set the overlay scene and
-   // load the overlay color map with the wanted color.
-   SbColor color(.5, 1, .5);
-   SoWxExaminerViewer *myViewer = new SoWxExaminerViewer(myWindow);
+    // read the scene graph in
+    SoNode *scene;
+    {
+        SoInput in;
+        in.setBuffer((void *) overlayScene, (size_t) strlen(overlayScene));
+        if (!SoDB::read(&in, scene) || scene == NULL) {
+            printf("Couldn't read scene\n");
+            exit(1);
+        }
+    }
+    // Allocate the viewer, set the overlay scene and
+    // load the overlay color map with the wanted color.
+    SbColor color(.5, 1, .5);
+    SoWxExaminerViewer *myViewer = new SoWxExaminerViewer(myWindow);
 
 #ifdef sun
-   if (!glXIsOverlayTGS)
+    if (!glXIsOverlayTGS)
    {
      long value;
      int num;
@@ -149,17 +150,19 @@ main(int , char **argv)
    else
      myViewer->setOverlayColorMap(1, 1, &color);
 #else
-   myViewer->setOverlayColorMap(1, 1, &color);
+    myViewer->setOverlayColorMap(1, 1, &color);
 #endif
 
-   myViewer->setSceneGraph(new SoCone);
-   myViewer->setOverlaySceneGraph(scene);
-   myViewer->setTitle("Overlay Plane");
+    myViewer->setSceneGraph(new SoCone);
+    myViewer->setOverlaySceneGraph(scene);
+    myViewer->setTitle("Overlay Plane");
 
-   // Show the viewer and loop forever
-   myViewer->show();
-   //WxRealizeWidget(myWindow);
-   SoWx::mainLoop();
-   SoWx::done();
-   return 0;
+    // Show the viewer and loop forever
+    myViewer->show();
+    //WxRealizeWidget(myWindow);
+    SoWx::mainLoop();
+    scene->unref();
+    delete myViewer;
+    SoWx::done();
+    return 0;
 }

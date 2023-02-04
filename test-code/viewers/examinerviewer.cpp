@@ -38,27 +38,24 @@
 // *************************************************************************
 
 int
-main(
-  int argc,
-  char ** argv )
+main(int argc,
+     char ** argv )
 {
-  wxWindow* window = SoWx::init( argv[0] );
+    wxWindow* window = SoWx::init( argv[0] );
 
-  window->SetSize(1024,768);
-  SoNode * root = new SoCone;
+    SoWxExaminerViewer * viewer = new SoWxExaminerViewer( window );
+    viewer->setSize(SbVec2s(800,800));
 
-  SoWxExaminerViewer * viewer = new SoWxExaminerViewer( window );
-  // viewer->setBackgroundColor(SbColor(1,0,0));
+    SoNode * root = new SoCone;
+    viewer->setSceneGraph( root );
+    viewer->show();
+    SoWx::show( window );
 
-  viewer->setSceneGraph( root );
-  viewer->show();
-  SoWx::show( window );
+    SoWx::mainLoop();
 
-  SoWx::mainLoop();
-
-  delete viewer;
-  SoWx::done(); // delete all Coin stuff
-  return 0;
+    delete viewer;
+    SoWx::done(); // delete all Coin stuff
+    return 0;
 } // main()
 
 // *************************************************************************

@@ -181,14 +181,9 @@ SoWxComponent::show(void) {
                                PRIVATE(this)->storesize[1]);
     }
 
-    if (PRIVATE(this)->shelled) {
-        PRIVATE(this)->parent->SetClientSize(PRIVATE(this)->storesize[0],
-                                             PRIVATE(this)->storesize[1]);
-    }
-    else {
-        PRIVATE(this)->widget->SetClientSize(PRIVATE(this)->storesize[0],
-                                             PRIVATE(this)->storesize[1]);
-    }
+    // only parent has power for setting the correct size
+    PRIVATE(this)->parent->SetClientSize(PRIVATE(this)->storesize[0],
+                                         PRIVATE(this)->storesize[1]);
 
     if (SOWXCOMP_RESIZE_DEBUG) {  // debug
         SoDebugError::postInfo("SoWxComponent::show-2",
@@ -198,23 +193,15 @@ SoWxComponent::show(void) {
                                PRIVATE(this)->widget->GetSize().GetY());
     }
 
+    if(! PRIVATE(this)->embedded && PRIVATE(this)->shelled) {
+#if SOWX_DEBUG
+        SoDebugError::postInfo("SoWxComponent::show",
+                               "perform show if is not embedded and is shelled");
+        PRIVATE(this)->parent->Show();
+#endif
+    }
     PRIVATE(this)->widget->Show();
 
-    if (SOWXCOMP_RESIZE_DEBUG) {  // debug
-        SoDebugError::postInfo("SoWxComponent::show-3",
-                               "showed %p: (%d, %d)",
-                               PRIVATE(this)->widget,
-                               PRIVATE(this)->widget->GetSize().GetX(),
-                               PRIVATE(this)->widget->GetSize().GetY());
-    }
-
-    if (SOWXCOMP_RESIZE_DEBUG) {  // debug
-        SoDebugError::postInfo("SoWxComponent::show-4",
-                               "raised %p: (%d, %d)",
-                               PRIVATE(this)->widget,
-                               PRIVATE(this)->widget->GetSize().GetX(),
-                               PRIVATE(this)->widget->GetSize().GetY());
-    }
     this->sizeChanged(PRIVATE(this)->storesize);
 }
 
@@ -333,12 +320,12 @@ void
 SoWxComponent::setSize(const SbVec2s size) {
 
 #ifdef SOWX_DEBUG
-    SoDebugError::postInfo("SoWx::setSize",
+    SoDebugError::postInfo("SoWxComponent::setSize",
                            " baseWidget %s",
-    dumpWindowData(this->getBaseWidget()).c_str());
-    SoDebugError::postInfo("SoWx::setSize",
+                           dumpWindowData(this->getBaseWidget()).c_str());
+    SoDebugError::postInfo("SoWxComponent::setSize",
                            " shellWidget %s",
-    dumpWindowData(this->getShellWidget()).c_str());
+                           dumpWindowData(this->getShellWidget()).c_str());
 #endif
 
 #if 0
@@ -350,7 +337,7 @@ SoWxComponent::setSize(const SbVec2s size) {
     }
 #endif
 #if 1
-    #if SOWX_DEBUG
+#if SOWX_DEBUG
     if((size[0] <= 0) || (size[1] <= 0)) {
         SoDebugError::postWarning("SoWxComponent::setSize",
                                   "Invalid size setting: <%d, %d>.",

@@ -59,7 +59,7 @@ SoWx::init(int & argc,
         // Set up the QApplication instance which we have derived into a
         // subclass to catch spaceball events.
         SoWxP::instance()->buildWxApp();
-        wxApp::SetInstance(SoWxP::instance()->getWxApp() );
+        wxApp::SetInstance(SoWxP::instance()->main_app);
         wxEntryStart( argc, argv );
         wxTheApp->CallOnInit();
     }
@@ -74,8 +74,8 @@ SoWx::init(int & argc,
                                                    appname));
 
     assert(SoWxP::instance());
-    assert(SoWxP::instance()->getWxApp());
-    SoWxP::instance()->getWxApp()->Bind(wxEVT_IDLE, &SoWxP::onIdle,  SoWxP::instance());
+    assert(wxTheApp);
+    wxTheApp->Bind(wxEVT_IDLE, &SoWxP::onIdle,  SoWxP::instance());
     SoWxP::instance()->getMainFrame()->Bind(wxEVT_CLOSE_WINDOW, &SoWxP::onClose,  SoWxP::instance());
 
     SoDB::getSensorManager()->setChangedCallback(SoGuiP::sensorQueueChanged,
@@ -110,7 +110,7 @@ SoWx::init(wxWindow* toplevelwidget) {
     // if wxApp is not already created
     if (wxApp::GetInstance() == NULL) {
         SoWxP::instance()->buildWxApp();
-        wxApp::SetInstance(SoWxP::instance()->getWxApp() );
+        wxApp::SetInstance(SoWxP::instance()->main_app);
         static const char * dummyargv[1];
         dummyargv[0] = "SoWx";
         int argc = 1;
@@ -123,7 +123,7 @@ SoWx::init(wxWindow* toplevelwidget) {
         SoWxP::instance()->setWxApp(wxApp::GetInstance());
     }
 
-    SoWxP::instance()->getWxApp()->Bind(wxEVT_IDLE, &SoWxP::onIdle,  SoWxP::instance());
+    wxTheApp->Bind(wxEVT_IDLE, &SoWxP::onIdle,  SoWxP::instance());
     if(toplevelwidget) {
         SoWxP::instance()->setMainFrame(toplevelwidget);
         SoWxP::instance()->getMainFrame()->Bind(wxEVT_CLOSE_WINDOW, &SoWxP::onClose, SoWxP::instance());
@@ -146,12 +146,17 @@ SoWx::init(wxWindow* toplevelwidget) {
 void
 SoWx::mainLoop(void) {
     wxTheApp->OnRun();
-    SoWxP::instance()->finish();
+}
+
+
+void
+SoWx::exitMainLoop(void)  {
+    wxExit();
 }
 
 void
 SoWx::done() {
-
+    SoWxP::instance()->finish();
 #if 0 // FIXME: These methods exist in TGS Inventor. We should add
     // them, and then call them from here. 20060210 kyrah
   SoInteraction::finish();
@@ -166,11 +171,21 @@ SoWx::show(wxWindow* const widget) {
 }
 
 void
+SoWx::hide(wxWindow* const widget) {
+    widget->Hide();
+}
+
+void
 SoWx::createSimpleErrorDialog(wxWindow* widget,
                               const char * title,
                               const char * string1,
                               const char * string2 ) {
     SOWX_STUB();
+}
+
+wxWindow*
+getTopLevelWidget(void) {
+    return (wxTheApp->GetTopWindow());
 }
 
 wxWindow*
@@ -194,10 +209,9 @@ SoWx::getShellWidget(const wxWindow* w) {
 #endif
 }
 
-
 void
 SoWx::setWidgetSize(wxWindow* const widget, const SbVec2s size) {
-
+    assert(widget != 0 && "widget can not be null");
     if ( widget ) {
         widget->SetSize(size[0], size[1]);
     }
@@ -206,6 +220,24 @@ SoWx::setWidgetSize(wxWindow* const widget, const SbVec2s size) {
         SoDebugError::postWarning("SoWx::setWidgetSize",
                                   "null widget on setting: <%d, %d>.",
                                   size[0], size[1]);
+    }
+#endif // SOWX_DEBUG
+}
+
+
+SbVec2s
+SoWx::getWidgetSize(const wxWindow* widget) {
+    assert(widget != 0 && "widget can not be null");
+    SbVec2s size(-1,-1);
+    if ( widget ) {
+        wxSize wx_size = widget->GetSize();
+        size[0] = wx_size.GetWidth();
+        size[1] = wx_size.GetHeight();
+    }
+#if SOWX_DEBUG
+    else  {
+        SoDebugError::postWarning("SoWx::getWidgetSize",
+                                  "null widget");
     }
 #endif // SOWX_DEBUG
 }

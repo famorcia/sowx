@@ -67,7 +67,6 @@ public:
 
     void buildWxApp();
     void setWxApp(wxAppConsole*);
-    wxAppConsole* getWxApp() const;
 
     void setMainFrame(wxWindow*);
     wxWindow* getMainFrame() const;
