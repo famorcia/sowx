@@ -166,7 +166,12 @@ SoWxGLArea::isGLFeatureAvailable(const SoWxGLArea::GLFormat& format,
     return (res);
 }
 
-
+bool
+SoWxGLArea::areEqual(const SoWxGLArea::GLFormat &format1,
+                     const SoWxGLArea::GLFormat &format2) {
+    SOWX_STUB();
+    return (false);
+}
 
 bool ConvertWXAttrsWxGLFormat(const int *wxattrs,
                               SoWxGLArea::GLFormat  &format)

@@ -58,6 +58,9 @@ public:
     static bool isGLFeatureAvailable(const GLFormat& ,
                                      int feature);
 
+    static bool areEqual(const GLFormat& format1,
+                         const GLFormat& format2);
+
 protected:
     void OnPaint(wxPaintEvent& event);
     void OnEraseBackground(wxEraseEvent& event);
