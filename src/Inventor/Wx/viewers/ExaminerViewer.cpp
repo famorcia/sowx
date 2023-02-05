@@ -61,6 +61,16 @@ SoWxExaminerViewer::SoWxExaminerViewer(wxWindow* parent,
     PRIVATE(this)->constructor(TRUE);
 }
 
+SoWxExaminerViewer::SoWxExaminerViewer(wxWindow *parent,
+                                       const char *name,
+                                       SbBool embed,
+                                       SoWxFullViewer::BuildFlag flag,
+                                       SoWxViewer::Type type,
+                                       SbBool build)
+    : inherited(parent, name, embed, flag, type, build) {
+    PRIVATE(this) = new SoWxExaminerViewerP(this);
+    PRIVATE(this)->constructor(build);
+}
 
 SoWxExaminerViewer::~SoWxExaminerViewer() {
     delete PRIVATE(this);
@@ -117,4 +127,5 @@ SoWxExaminerViewer::createViewerButtons(wxWindow* parent,
 
     buttonlist->append(PRIVATE(this)->cameratogglebutton);
 }
+
 
