@@ -19,4 +19,4 @@ Libs: -L${libdir} @SOWX_PKG_LIBS@
 Cflags: -I${includedir} @SOWX_PKG_FLAGS@
 
 frameworkdir=@frameworkdir@
-motif_version=@MOTIF_VERSION_MAJOR@.@MOTIF_VERSION_MINOR@.@MOTIF_VERSION_PATCH@
+wxwidgets_version=@wxWidgets_VERSION_MAJOR@.@wxWidgets_VERSION_MINOR@.@wxWidgets_VERSION_PATCH@
