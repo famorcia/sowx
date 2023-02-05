@@ -12,6 +12,16 @@ Thanks to the powerful porting support provided by wxWidgets SoWx has been succe
  - Windows
  - Mac OS (coming soon)
 
+## Linux compile
+
+Required libs are:
+
+ - wxWidgets (version >= 3.2)
+ - Coin (version >= 4.0)
+ - boost (version >= 1.48 only for test )
+
+For other details please refer to [INSTALL](./INSTALL).
+
 ## cpack 
 
 cpack can generate configuration for predefined platform.
